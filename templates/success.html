@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Recruitment OSIS - Berhasil{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1><i class="fas fa-check-circle" style="color: #28a745;"></i> Pendaftaran Berhasil!</h1>
+    <p>Terima kasih telah mendaftar sebagai calon pengurus OSIS SMA IGS</p>
+</div>
+
+<div class="progress-bar">
+    <div class="progress-fill" style="width: 100%"></div>
+</div>
+
+<div style="text-align: center; padding: 40px 0;">
+    <div style="background: linear-gradient(135deg, #f98f2c, #ffcc00); color: white; padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <i class="fa-solid fa-bullhorn" style="font-size: 3em; margin-bottom: 15px;"></i>
+        <h2 style="margin-bottom: 15px;">SILAHKAN JOIN GROUP LINE BERIKUT !!</h2>
+        <a href="https://line.me/R/ti/g/cKdxUxDD7K" style="color: white; font-weight: bold; max-width: 30vw;">https://line.me/R/ti/g/cKdxUxDD7K</a>
+    </div>
+    
+    <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin-bottom: 30px; text-align: left;">
+        <h3 style="color: #333; margin-bottom: 15px;"><i class="fas fa-info-circle"></i> Langkah Selanjutnya:</h3>
+        <ul style="color: #666; line-height: 1.8;">
+            <li>Tim OSIS akan meninjau aplikasi anda</li>
+            <li>Hasil seleksi administrasi akan diumumkan melalui group line calon osis sma igs</li>
+            <li>Kandidat yang lolos akan lanjut untuk tahap wawancara</li>
+            <li>Jika terdapat pertanyaan/kendala lebih lanjut mengenai form pendaftaran bisa menghubungi id line berikut: kevinwilbertjohan</li>
+        </ul>
+    </div>
+</div>
+
+<div class="form-actions">
+    <a href="{{ url_for('index') }}" class="btn">
+        <i class="fas fa-home"></i> Kembali ke Beranda
+    </a>
+</div>
+
+<style>
+    .header h1 {
+        animation: successBounce 0.8s ease-out;
+    }
+    
+    @keyframes successBounce {
+        0% { transform: scale(0.3); opacity: 0; }
+        50% { transform: scale(1.1); opacity: 0.8; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .fas.fa-check-circle {
+        animation: checkPulse 2s infinite;
+    }
+    
+    @keyframes checkPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
+{% endblock %}

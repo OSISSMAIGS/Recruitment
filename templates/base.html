@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Recruitment OSIS{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        // Auto-save functionality
+        let autoSaveTimeout;
+        
+        function autoSave() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                const formData = {};
+                
+                // Collect form data
+                const inputs = document.querySelectorAll('input[type="text"], input[type="email"], select, textarea');
+                inputs.forEach(input => {
+                    if (input.name && input.value) {
+                        formData[input.name] = input.value;
+                    }
+                });
+                
+                // Collect checkbox data
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                const checkboxGroups = {};
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.name) {
+                        if (!checkboxGroups[checkbox.name]) {
+                            checkboxGroups[checkbox.name] = [];
+                        }
+                        checkboxGroups[checkbox.name].push(checkbox.value);
+                    }
+                });
+                
+                // Merge checkbox data
+                Object.assign(formData, checkboxGroups);
+                
+                // Collect radio data
+                const radios = document.querySelectorAll('input[type="radio"]:checked');
+                radios.forEach(radio => {
+                    if (radio.name && radio.value) {
+                        formData[radio.name] = radio.value;
+                    }
+                });
+                
+                // Send to server
+                if (Object.keys(formData).length > 0) {
+                    fetch('/auto_save', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log('Progress tersimpan');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error saving progress:', error);
+                    });
+                }
+            }, 1000); // Save after 1 second of inactivity
+        }
+        
+        // Checkbox validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            
+            // Handle checkbox selection
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const parent = this.closest('.checkbox-item');
+                    if (this.checked) {
+                        parent.classList.add('selected');
+                    } else {
+                        parent.classList.remove('selected');
+                    }
+                    
+                    // Validate max 2 selections
+                    const checked = document.querySelectorAll('input[name="sekbid"]:checked');
+                    if (checked.length > 2) {
+                        this.checked = false;
+                        parent.classList.remove('selected');
+                        alert('Maksimal 2 pilihan sekbid!');
+                    }
+                    
+                    // Auto-save
+                    autoSave();
+                });
+            });
+            
+            // Handle radio button selection
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Remove selected class from all radio items
+                    document.querySelectorAll('.radio-item').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to current item
+                    if (this.checked) {
+                        this.closest('.radio-item').classList.add('selected');
+                    }
+                    
+                    // Auto-save
+                    autoSave();
+                });
+            });
+            
+            // Handle text inputs for auto-save
+            const textInputs = document.querySelectorAll('input[type="text"], input[type="email"], select, textarea');
+            textInputs.forEach(input => {
+                input.addEventListener('input', autoSave);
+                input.addEventListener('change', autoSave);
+            });
+            
+            // Update sekbid selection info
+            const sekbidCheckboxes = document.querySelectorAll('input[name="sekbid"]');
+            const sekbidInfo = document.querySelector('.sekbid-info');
+            
+            if (sekbidCheckboxes.length > 0 && sekbidInfo) {
+                function updateSekbidInfo() {
+                    const checkedSekbid = Array.from(sekbidCheckboxes)
+                        .filter(cb => cb.checked)
+                        .map(cb => cb.value);
+                    
+                    if (checkedSekbid.length > 0) {
+                        sekbidInfo.innerHTML = `
+                            <i class="fas fa-info-circle"></i>
+                            <small style="color: #2196f3;">
+                                Sekbid yang dipilih: <strong>${checkedSekbid.join(', ')}</strong>
+                            </small>
+                        `;
+                    } else {
+                        sekbidInfo.innerHTML = `
+                            <i class="fas fa-info-circle"></i>
+                            <small style="color: #2196f3;"></small>
+                        `;
+                    }
+                }
+                
+                sekbidCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', updateSekbidInfo);
+                });
+                
+                // Initialize on page load
+                updateSekbidInfo();
+            }
+            
+            // File upload handler
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    const fileName = this.files[0] ? this.files[0].name : 'Pilih file...';
+                    const label = this.nextElementSibling;
+                    label.innerHTML = `<i class="fas fa-check-circle"></i><div><strong>${fileName}</strong><br><small>File berhasil dipilih</small></div>`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

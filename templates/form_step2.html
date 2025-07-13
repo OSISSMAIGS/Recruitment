@@ -1,0 +1,407 @@
+{% extends "base.html" %}
+
+{% block title %}Recruitment OSIS - Step 2{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1><i class="fas fa-clipboard-list"></i> Recruitment OSIS</h1>
+    <p style="text-align: start;">Berikut peraturan yang WAJIB diketahui sebelum mendaftar OSIS SMA IGS 2024/2025
+        <br>
+        <br>
+        1. Anggota OSIS dilarang untuk menjalin hubungan pasangan dengan orang lain, baik di dalam maupun di luar organisasi, selama masa jabatan berlangsung
+        <br>
+        <br>
+        2. Anggota OSIS wajib mengikuti peraturan yang berlaku di sekolah
+        <br>
+        <br>
+        3. Anggota OSIS wajib menjaga integritas dan nama baik sekolah, dan nama baik OSIS SMA IGS
+        <br>
+        <br>
+        4. Anggota OSIS wajib mengikuti seluruh peraturan yang disepakati oleh ketua dan wakil ketua OSIS
+        Pelanggaran akan dikenakan sanksi setara, terimakasih.
+    </p>
+</div>
+
+<div class="step-indicator">
+    <span>Step 1</span> of 2 - <span class="current">Step 2</span> - Informasi Lengkap
+</div>
+
+<div class="progress-bar">
+    <div class="progress-fill" style="width: 100%"></div>
+</div>
+
+{% if progress and progress.get('step') %}
+<div class="progress-notice">
+    <i class="fas fa-info-circle"></i> 
+    Progress Anda telah tersimpan. Anda dapat melanjutkan dari sini atau 
+    <a href="{{ url_for('clear_user_progress') }}" onclick="return confirm('Yakin ingin menghapus progress?')">mulai dari awal</a>.
+</div>
+{% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    <i class="fas fa-exclamation-circle"></i> {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<form id="submit-form" method="POST" action="{{ url_for('submit_form') }}" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>
+            <i class="fas fa-tasks"></i> Seksi Bidang <span class="required">*</span>
+            <small style="color: #666; font-weight: normal;">(Maximal 2)</small>
+        </label>
+        <div class="sekbid-info">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="checkbox-group">
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid1" name="sekbid" value="Ketua OSIS" 
+                       {% if 'Ketua OSIS' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid1">Ketua OSIS</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid2" name="sekbid" value="Wakil Ketua OSIS"
+                       {% if 'Wakil Ketua OSIS' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid2">Wakil Ketua OSIS</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid3" name="sekbid" value="Sekretaris"
+                       {% if 'Sekretaris' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid3">Sekretaris</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid4" name="sekbid" value="Bendahara"
+                       {% if 'Bendahara' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid4">Bendahara</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid5" name="sekbid" value="Sekbid Belanegara"
+                       {% if 'Sekbid Belanegara' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid5">Sekbid Belanegara</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid6" name="sekbid" value="Sekbid Ketuhanan"
+                       {% if 'Sekbid Ketuhanan' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid6">Sekbid Ketuhanan</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid7" name="sekbid" value="Sekbid Multimedia"
+                       {% if 'Sekbid Multimedia' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid7">Sekbid Multimedia</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid8" name="sekbid" value="Seksi Dokumentasi"
+                       {% if 'Seksi Dokumentasi' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid8">Seksi Dokumentasi</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid9" name="sekbid" value="Seksi Kreatif"
+                       {% if 'Seksi Kreatif' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid9">Seksi Kreatif</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid10" name="sekbid" value="Seksi Desain"
+                       {% if 'Seksi Desain' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid10">Seksi Desain</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid11" name="sekbid" value="Sekbid Humas & Publikasi"
+                       {% if 'Sekbid Humas & Publikasi' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid11">Sekbid Humas & Publikasi</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid12" name="sekbid" value="Sekbid Bahasa"
+                       {% if 'Sekbid Bahasa' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid12">Sekbid Bahasa</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid13" name="sekbid" value="Sekbid Komunikasi"
+                       {% if 'Sekbid Komunikasi' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid13">Sekbid Komunikasi</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid14" name="sekbid" value="Sekbid Apresiasi Seni & Olahraga"
+                       {% if 'Sekbid Apresiasi Seni & Olahraga' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid14">Sekbid Apresiasi Seni & Olahraga</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid15" name="sekbid" value="Sekbid Sosial"
+                       {% if 'Sekbid Sosial' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid15">Sekbid Sosial</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid16" name="sekbid" value="Seksi Script Writer"
+                       {% if 'Seksi Script Writer' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid16">Seksi Script Writer</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid17" name="sekbid" value="Seksi Video Editor"
+                       {% if 'Seksi Video Editor' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid17">Seksi Video Editor</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid18" name="sekbid" value="Seksi Illustrator"
+                       {% if 'Seksi Illustrator' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid18">Seksi Illustrator</label>
+            </div>
+            <div class="checkbox-item">
+                <input type="checkbox" id="sekbid19" name="sekbid" value="Seksi Actor"
+                       {% if 'Seksi Actor' in progress.get('sekbid', []) %}checked{% endif %}>
+                <label for="sekbid19">Seksi Actorr</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="gdrive_link">
+            <i class="fas fa-link"></i> Upload Gdrive tugas sekbid OSIS <br>
+            *Pastikan settingan sudah benar (View Only)
+            <br>
+            <br>
+            KRITERIA PENDAFTARAN OSIS 2024-2025
+            <br>
+            <br>
+             1. Ketua OSIS dan Wakil Ketua OSIS <br>
+             ⁃ Menyertakan portofolio pernah memimpin dalam suatu organisasi 
+            <br>
+            <br>
+             2. Sekertaris <br>
+             ⁃ Membuat 1 proposal kegiatan acara 17 an
+             <br>
+             <br>
+             3. Bendahara <br>
+             ⁃ Membuat 1 excel data keuangan 17an
+             <br>
+             <br>
+             4. Sekbid Belanegara <br>
+             ⁃ Membuat rancangan acara 17an berisikan rundown dan ide games ( dikumpulkan dalam bentuk sheet) 
+             <br>
+             <br>
+             5. Sekbid Ketuhanan <br>
+             ⁃ Membuat rancangan acara hari keagamaan berisikan rundown dan ice breaking bertemakan agama disertai mekanisme setiap games
+             <br>
+             <br>
+             6. Sekbid Multimedia Website<br>
+             ⁃ Membuat Website Portofolio yang diupload ke github pages
+             <br>
+             contoh: <br>
+             <a href="https://natassha.github.io/natasshaselvaraj/">https://natassha.github.io/natasshaselvaraj/</a> <br>
+             <a href="https://alexandre-pr.github.io/portfolio/">https://alexandre-pr.github.io/portfolio/</a>
+             <br>
+             <br>
+            7. Sekbid Multimedia Onfield<br>
+            - Buat sebuah essay singkat tentang: <br>
+            1.Apa saja yang kamu ketahui tentang pekerjaan yang ada di sekbid Mutimedia Onfield (Lighting, Camera, Soundsystem, Vidiotron, Switcher) <br>
+            2.Ceritakan pengalaman kamu dalam bidang Multimedia (Opsional) <br>
+            Dikumpulkan dalam bentuk docs
+            <br>
+            <br>
+             8. Seksi Dokumentasi: <br>
+             ⁃ Mengirimkan hasil foto pribadi tanpa editing, minimal 3. <br>
+             ⁃ Mengirimkan sebuah video cinematic berupa 25-35 detik (contoh: <a href="https://vt.tiktok.com/ZSYanhMv4/">https://vt.tiktok.com/ZSYanhMv4/</a>). Ada movement (opsional). <br>
+             ⁃ Mengirimkan document berisi keterangan equipment yang dimiliki (jenis kamera dan juga equipment opsional seperti lensa, gimbal, drone, dll). Dengan format ini : <a href="https://docs.google.com/document/d/1MlL0mR93z4TtKK3wFTjXVemyQrgpy-nJJkqMyodv-w0/edit?usp=drivesdk">https://docs.google.com/document/d/1MlL0mR93z4TtKK3wFTjXVemyQrgpy-nJJkqMyodv-w0/edit?usp=drivesdk</a>
+            <br>
+            <br>
+             9. Seksi Kreatif: <br>
+             ⁃ mengirimkan hasil prakarya/ rancangan kasar backdrop(dekor) untuk event 17 Agustus (pilih salah satu diantara pilihan tersebut, jika ingin dua duanya juga diperbolehkan) <br>
+             ⁃ untuk prakarya minimal 2 silahkan rekam video hasilnya dari setiap sudut pandang dan untuk rancangan kasar dekor minimal 1 bisa langsung upload gambarannya dalam bentuk foto/pdf
+            <br>
+            <br>
+             10. Seksi Desain: <br>
+             ⁃ Mengirimkan 1 gambar digitial art bertemakan 17an <br>
+            Poin + <br>
+             ⁃ Bisa animasi gambar menggunakan after effect/blender (gerakan gambar sedikit tapi terlihat)
+             <br>
+             <br>
+    
+             11. Sekbid Humas & Publikasi <br>
+             ⁃ Membuat konten Tiktok dengan tema promosi Event 17an <br>
+             ⁃ Membuat 1 design template/poster dengan tema Event 17an
+             <br>
+             <br>
+            
+             12. Sekbid Bahasa: <br>
+             ⁃ Membuat vidio speech "In what ways is language powerful?"(Indonesia/Inggris) <br>
+             ⁃ Membuat nama event 17an berserta artinya(sekreatif mungkin) <br>
+             ⁃ Membuat caption ig untuk event 17an <br>
+             ⁃ Membuat judul video Youtube yang bertemakan 17an
+             <br>
+             <br>
+            
+             13. Sekbid Komunikasi: <br>
+             ⁃ Membuat video mc yang berisikan: <br>
+            Pembukaan acara-pemanggilan performance-penutupan acara (INFORMAL). <br>
+            Berdurasikan minimal 1.30 menit. Jikalau ada text MC, boleh dikumpul didalam satu file bersamaan dengan video. <br>
+            Poin + <br>
+             ⁃ Mengirimkan berkas berupa PDF/gdrive berisikan video pengalaman/prestasi lomba yang berkaitan dengan bidang komunikasi
+             <br>
+             <br>
+            
+             14. Sekbid Apresiasi Seni & Olahraga: <br>
+             ⁃ Mengirimkan video bakat (bisa menari, menyanyi, bermain alat musik, dll) <br>
+             ⁃ Buatlah list klub-klub di IGS yang jarang tampil di event sekolah
+             <br>
+             <br>
+            
+             15. Sekbid Sosial: <br>
+             ⁃ Membuat video speech max 2 menit menjelaskan ide mengenai kegiatan atau acara yang berhubungan dengan sosial beserta dengan manfaat kegiatan tersebut
+             <br>
+             <br>
+            
+             16. Seksi Script Writer: <br>
+             ⁃ Merancang ide konten menjadi cerita tertulis, membuat kerangka skenario, dan mengatur alur cerita.
+             <br>
+             <br>
+            
+             17. Seksi Video Editor: <br>
+             ⁃ membuat video editan bebas, semenarik mungkin. Maksimal 3 menit.
+             <br>
+             <br>
+            
+             18. Seksi Illustrator: <br>
+             ⁃ Membuat powerpoint (PPT) games ice breaking : Teka Teki  event17an
+             <br>
+             <br>
+            
+             19. Seksi Actor <br>
+             ⁃ membuat video acting <br>
+            cewe: casting film Balada si Roy <br>
+            cowo: casting film Catatan si Boy <br>
+            contoh: <a href="https://drive.google.com/drive/folders/1-M8xl5Kxwcy46n2GH-l4E7dNzmqT7rpZ">https://drive.google.com/drive/folders/1-M8xl5Kxwcy46n2GH-l4E7dNzmqT7rpZ</a>
+            <br>
+            <br>
+
+            20. Sekbid Environmental, Social, Governance (ESG) <br>
+            ⁃ Buat speech tentang pentingnya menjaga lingkungan dan caranya
+            <br>
+            <br>
+            KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT GDRIVE (settings: view only) <span class="required">*</span>
+        </label>
+        <input type="text" id="gdrive_link" name="gdrive_link" required 
+               placeholder="https://drive.google.com/..."
+               value="{{ progress.get('gdrive_link', '') }}">
+    </div>
+
+    <div class="form-group">
+        <label for="visi_misi">
+            <i class="fas fa-bullseye"></i> Visi dan Misi OSIS (Berhubungan dengan bidang yang dipilih)
+            <span class="required">*</span>
+        </label>
+        <textarea id="visi_misi" name="visi_misi" required 
+                  placeholder="Tuliskan visi dan misi Anda untuk OSIS...">{{ progress.get('visi_misi', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="motivasi">
+            <i class="fas fa-fire"></i> Motivasi ingin menjadi OSIS 
+            <span class="required">*</span>
+        </label>
+        <textarea id="motivasi" name="motivasi" required 
+                  placeholder="Apa yang memotivasi Anda bergabung dengan OSIS?">{{ progress.get('motivasi', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="kelebihan">
+            <i class="fas fa-star"></i> Apa Kelebihan Anda <span class="required">*</span>
+        </label>
+        <textarea id="kelebihan" name="kelebihan" required 
+                  placeholder="Ceritakan kelebihan yang Anda miliki...">{{ progress.get('kelebihan', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="kekurangan">
+            <i class="fas fa-exclamation-triangle"></i> Apa Kekurangan Anda <span class="required">*</span>
+        </label>
+        <textarea id="kekurangan" name="kekurangan" required 
+                  placeholder="Ceritakan kekurangan yang Anda miliki dan bagaimana mengatasinya...">{{ progress.get('kekurangan', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="pengalaman_organisasi">
+            <i class="fas fa-users-cog"></i> Pengalaman Berorganisasi (Opsional)
+        </label>
+        <textarea id="pengalaman_organisasi" name="pengalaman_organisasi" 
+                  placeholder="Ceritakan pengalaman berorganisasi Anda (opsional)...">{{ progress.get('pengalaman_organisasi', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="sertifikat">
+            <i class="fas fa-certificate"></i> Sertifikat Pengalaman atau Prestasi (Opsional)
+            <small style="color: #666; font-weight: normal;">(Opsional - Format: PNG, JPG, JPEG, Max 5MB)</small>
+        </label>
+        <div class="file-upload">
+            <input type="file" id="sertifikat" name="sertifikat" accept=".png,.jpg,.jpeg">
+            <label for="sertifikat" class="file-upload-label">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <div>
+                    <strong>Pilih file...</strong><br>
+                    <small>Klik untuk upload sertifikat atau prestasi</small>
+                </div>
+            </label>
+        </div>
+        {% if progress.get('sertifikat_link') %}
+        <div class="uploaded-file">
+            <i class="fas fa-check-circle"></i> File telah diupload sebelumnya
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="skala_prioritas"> 
+            <i class="fas fa-sort-numeric-down"></i> Skala Prioritas <span class="required">*</span> <br> 1. Keluarga <br>
+            2. Agama <br>
+            3. Sekolah <br>
+            4. OSIS <br>
+            5. Teman <br>
+            Contoh: 1-2-3-4-5
+        </label>
+        <textarea id="skala_prioritas" name="skala_prioritas" required 
+                  placeholder="Contoh: 1-2-3-4-5">{{ progress.get('skala_prioritas', '') }}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <i class="fas fa-question-circle"></i> Apakah kamu yakin dapat menjalankan seluruh peraturan OSIS yang berlaku? <span class="required">*</span>
+        </label>
+        <div class="radio-group">
+            <div class="radio-item">
+                <input type="radio" id="yakin_ya" name="yakin_peraturan" value="Ya, saya yakin" required
+                       {% if progress.get('yakin_peraturan') == 'Ya, saya yakin' %}checked{% endif %}>
+                <label for="yakin_ya">Ya, saya yakin</label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" id="yakin_tidak" name="yakin_peraturan" value="Tidak yakin" required
+                       {% if progress.get('yakin_peraturan') == 'Tidak yakin' %}checked{% endif %}>
+                <label for="yakin_tidak">Tidak yakin</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <a href="{{ url_for('index') }}" class="btn btn-back">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <button type="submit" id="submit-btn" class="btn">
+            <i class="fas fa-paper-plane"></i> Submit
+        </button>
+    </div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const form = document.getElementById('submit-form');
+  const btn  = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', function(){
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+  });
+});
+</script>
+{% endblock %}
