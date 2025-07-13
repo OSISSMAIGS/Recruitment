@@ -179,22 +179,22 @@ def save_to_gsheet(data):
                     sheet.append_row(row_data)
                     success_count += 1
                     saved_sheets.append(sekbid)
-                    print(f"✓ Data successfully saved to sheet: {sekbid}")
+                    print(f"Data successfully saved to sheet: {sekbid}")
                 else:
-                    print(f"✗ Failed to get/create sheet: {sekbid}")
+                    print(f"Failed to get/create sheet: {sekbid}")
             except Exception as e:
-                print(f"✗ Error saving to sheet {sekbid}: {e}")
+                print(f"Error saving to sheet {sekbid}: {e}")
         
         if success_count > 0:
-            print(f"✓ Successfully saved data to {success_count} sheet(s): {', '.join(saved_sheets)}")
+            print(f"Successfully saved data to {success_count} sheet(s): {', '.join(saved_sheets)}")
         else:
-            print("✗ Failed to save data to any sheet")
+            print("Failed to save data to any sheet")
         
         # Return True if at least one sheet was updated successfully
         return success_count > 0
         
     except Exception as e:
-        print(f"✗ Error in save_to_gsheet: {e}")
+        print(f"Error in save_to_gsheet: {e}")
         return False
 
 @app.route('/')
