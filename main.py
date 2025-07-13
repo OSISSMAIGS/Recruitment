@@ -6,15 +6,16 @@ from werkzeug.utils import secure_filename
 import uuid
 from datetime import datetime
 import json
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv())
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
 
-# Configuration
-UPLOAD_FOLDER = 'static/uploads'
-PROGRESS_FOLDER = 'progress_data'
+# Directories (absolute paths)
+BASE_DIR = app.root_path
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+PROGRESS_FOLDER = os.path.join(BASE_DIR, 'progress_data')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
@@ -30,7 +31,7 @@ SCOPE = ['https://spreadsheets.google.com/feeds',
 
 # You need to create a service account and download the JSON key file
 # Place it in your project directory and update the path below
-SERVICE_ACCOUNT_FILE = './credensials.json'
+SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'credensials.json') 
 SPREADSHEET_ID = os.getenv('SPREADSHEET_ID')
 
 def get_session_id():
