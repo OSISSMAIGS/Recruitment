@@ -374,6 +374,10 @@ def debug_sheets():
         return jsonify({'success': False, 'message': 'Failed to connect to Google Sheets'})
     except Exception as e:
         return jsonify({'success': False, 'message': f'Error: {str(e)}'})
+    
+@app.errorhandler(404)
+def eror_404(error):
+    return render_template("404.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

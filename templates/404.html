@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | OSIS SMA IGS</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/img/valiancelogo.png') }}" type="image/x-icon">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        img{
+            --size: 30vw;
+            width: var(--size);
+            height: var(--size);
+        }
+
+        h1{
+            color: black;
+            font-weight: 700;
+            font-size: 5vw;
+        }
+
+        a{
+            font-size: 3vw;
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='/img/valiancelogo.png') }}" alt="">
+    <h1>404 - Not Found</h1>
+    <a href="/">Back to Home</a>
+</body>
+</html>

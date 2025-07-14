@@ -291,6 +291,10 @@ textarea {
     margin-top: 30px;
 }
 
+.form-actions a, .form-actions button{
+    margin-bottom: 5%;
+}
+
 .flash-messages {
     margin-bottom: 20px;
 }
