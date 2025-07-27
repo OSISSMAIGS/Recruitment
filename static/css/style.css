@@ -397,6 +397,12 @@ textarea {
     height: var(--size);
 }
 
+iframe{
+    --size: 33vw;
+    width: var(--size);
+    height: calc(var(--size)/1.6);
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 20px;
@@ -408,5 +414,11 @@ textarea {
 
     .checkbox-group {
         grid-template-columns: 1fr;
+    }
+
+    iframe{
+        --size: 80vw;
+        width: var(--size);
+        height: calc(var(--size)/1.6);
     }
 }
