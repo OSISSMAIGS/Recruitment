@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Ditutup | OSIS SMA IGS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='/img/valiancelogo.png') }}" type="image/x-icon">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(255, 252, 252);
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Roboto', sans-serif;
+            gap: 1%;
+            padding: 20px;
+        }
+
+        .logo{
+            --size: 30vw;
+            width: var(--size);
+            height: var(--size);
+            background-image: url(../static/img/valiancelogo.png);
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        h1{
+            margin-top: 1%;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h5{
+            margin-top: 1%;
+            font-size: 1.5rem;
+            text-align: center;
+            max-width: 90%;
+            text-wrap: wrap;
+        }
+
+        span{
+            background-color: rgb(241, 111, 30);
+            padding: 0.5% 4%;
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: 700;
+        } 
+        
+        a{
+            width: 80%;
+            max-width: 400px;
+            min-height: 60px;
+            background-color: white;
+            margin: 20px 0;
+            color: rgb(241, 111, 30);
+            font-size: 1.2rem;
+            border-radius: 1rem;
+            box-shadow: 0px 0px 25px lightgrey;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: orange wavy underline;
+            font-weight: 700;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 30px rgba(241, 111, 30, 0.3);
+        }
+        
+        /* Tablet styles */
+        @media screen and (max-width: 1024px){
+            body{
+                gap: 3%;
+            }
+            .logo{
+                --size: 50vw;
+            }
+            h1{
+                font-size: 2.5rem;
+            }
+            h5{
+                font-size: 1.3rem;
+            }
+            a{
+                width: 85%;
+                font-size: 1.1rem;
+            }
+        } 
+
+        /* Mobile styles */
+        @media screen and (max-width: 768px){
+            body{
+                gap: 5%;
+                padding: 15px;
+            }
+            .logo{
+                --size: 60vw;
+            }
+            h1{
+                font-size: 2rem;
+                margin-top: 3%;
+            }
+            h5{
+                font-size: 1.1rem;
+                margin-top: 3%;
+            }
+            span{
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+            a{
+                width: 90%;
+                font-size: 1rem;
+                padding: 18px 15px;
+                margin: 25px 0;
+                min-height: 55px;
+            }
+        }
+
+        /* Small mobile styles */
+        @media screen and (max-width: 480px){
+            .logo{
+                --size: 70vw;
+            }
+            h1{
+                font-size: 1.7rem;
+            }
+            h5{
+                font-size: 1rem;
+            }
+            a{
+                width: 95%;
+                font-size: 0.9rem;
+                padding: 20px 10px;
+                border-radius: 0.8rem;
+            }
+            span{
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo"></div>
+    <h1>Registrasi telah ditutup</h1>
+    <h5>Jika ada pertanyaan lebih lanjut, silahkan hubungi id line berikut: </h5>
+    <h5><span>kevinwilbertjohan</span></h5>
+    <a href="https://osissmaigs.com">Check out OSIS SMA IGS's Website</a>
+</body>
+</html>

@@ -199,9 +199,10 @@ def save_to_gsheet(data):
 
 @app.route('/')
 def index():
-    # Load existing progress
-    progress = load_progress()
-    return render_template('form_step1.html', progress=progress)
+    # Load existing progress (UNCOMMENT CODE BELOW IF YOU WANT TO REOPEN THE REGISTRATION FORM !!!!)
+    # progress = load_progress()
+    # return render_template('form_step1.html', progress=progress)
+    return render_template('closed.html')
 
 @app.route('/step1', methods=['POST'])
 def step1():
